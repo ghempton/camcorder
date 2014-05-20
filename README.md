@@ -56,11 +56,11 @@ gem 'camcorder'
 
 And then execute:
 
-    $ bundle
+    bundle
 
 Or install it yourself as:
 
-    $ gem install camcorder
+    gem install camcorder
 
 ## Usage with Rspec
 
