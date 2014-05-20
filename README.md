@@ -72,7 +72,7 @@ Camcorder.configuration.recordings_dir = 'spec/recordings'
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/camcorder/fork )
+1. Fork it ( http://github.com/ghempton/camcorder/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
