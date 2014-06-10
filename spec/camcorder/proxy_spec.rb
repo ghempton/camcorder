@@ -14,6 +14,13 @@ describe Camcorder::Proxy do
       
     end
     
+    it 'should re-raise recorded errors' do
+      
+      expect_any_instance_of(TestObject).to_not receive(:broke_method)
+      expect{subject.broke_method}.to raise_error(StandardError)
+      
+    end
+    
   end
   
   context 'when recording does not exist' do

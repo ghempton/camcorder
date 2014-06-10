@@ -1,0 +1,5 @@
+---
+TestObject-broke_method-cdc941172e4d28939f6513e81222285c: !ruby/object:Camcorder::Recording
+  value: !ruby/exception:StandardError
+    message: errorz
+  behavior: :raise

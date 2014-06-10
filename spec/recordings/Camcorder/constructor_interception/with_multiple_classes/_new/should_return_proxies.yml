@@ -1,9 +1,13 @@
 ---
-TestObject2-simple_method-4de0fd48a5b0c805e290ecc39c85f9e7:
-- 1
-- 2
-- 3
-TestObject-simple_method-cdc941172e4d28939f6513e81222285c:
-- A
-- B
-- C
+TestObject2-simple_method-4de0fd48a5b0c805e290ecc39c85f9e7: !ruby/object:Camcorder::Recording
+  value:
+  - 1
+  - 2
+  - 3
+  behavior: :return
+TestObject-simple_method-cdc941172e4d28939f6513e81222285c: !ruby/object:Camcorder::Recording
+  value:
+  - A
+  - B
+  - C
+  behavior: :return

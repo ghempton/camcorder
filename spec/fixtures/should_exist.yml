@@ -1,2 +1,4 @@
 ---
-key: dis be da result
+key: !ruby/object:Camcorder::Recording
+  value: dis be da result
+  behavior: :return

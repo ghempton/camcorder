@@ -1,0 +1,5 @@
+---
+key-with-error: !ruby/object:Camcorder::Recording
+  value: !ruby/exception:StandardError
+    message: errorz
+  behavior: :raise

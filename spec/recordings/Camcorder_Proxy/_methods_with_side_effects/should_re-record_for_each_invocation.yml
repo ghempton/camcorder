@@ -1,3 +1,7 @@
 ---
-TestObject-method_with_side_effects-663f267dd7915410d1fce869a1bb0039: 1
-TestObject-method_with_side_effects-4ad0eb78b76e60e313f8d7b40194d3fc: 2
+TestObject-method_with_side_effects-663f267dd7915410d1fce869a1bb0039: !ruby/object:Camcorder::Recording
+  value: 1
+  behavior: :return
+TestObject-method_with_side_effects-4ad0eb78b76e60e313f8d7b40194d3fc: !ruby/object:Camcorder::Recording
+  value: 2
+  behavior: :return

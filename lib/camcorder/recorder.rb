@@ -1,4 +1,5 @@
 require 'yaml'
+require 'camcorder/recording'
 
 module Camcorder
   
@@ -16,6 +17,7 @@ module Camcorder
     def transaction(&block)
       start
       yield
+    ensure
       commit
     end
 
@@ -38,32 +40,26 @@ module Camcorder
     def record(key, &block)
       if @replaying
         if recordings.has_key?(key)
-          recordings[key]
+          recordings[key].replay
         else
           raise PlaybackError.new(key)
         end
       else
-        result = yield
-        @changed = true
-        if recordings.has_key?(key)
-          if !deep_equals(recordings[key], result)
-            raise RecordingError(key)
+        begin
+          recording = Recording.new
+          result = recording.record(&block)
+        ensure
+          @changed = true
+          if recordings.has_key?(key)
+            if recordings[key] != recording
+              raise RecordingError(key)
+            end
+          else
+            recordings[key] = recording
           end
-        else
-          # Make sure we store a copy of the result so future destructive mutations
-          # do not change this value
-          recordings[key] = deep_clone(result)
+          result
         end
-        result
       end
-    end
-
-    def deep_clone(value)
-      YAML.load(YAML.dump(value))
-    end
-    
-    def deep_equals(a, b)
-      YAML.dump(a) == YAML.dump(b)
     end
 
   end

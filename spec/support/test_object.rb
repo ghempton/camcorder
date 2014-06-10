@@ -14,4 +14,8 @@ class TestObject
     @count += 1
   end
   
+  def broke_method
+    raise StandardError.new('errorz')
+  end
+  
 end
