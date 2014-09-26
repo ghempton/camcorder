@@ -69,7 +69,7 @@ In your `spec_helper.rb` file:
 ```ruby
 require 'camcorder/rspec'
 
-Camcorder.configuration.recordings_dir = 'spec/recordings'
+Camcorder.config.recordings_dir = 'spec/recordings'
 ```
 
 ## Contributing
