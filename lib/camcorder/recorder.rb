@@ -2,7 +2,7 @@ require 'yaml'
 require 'camcorder/recording'
 
 module Camcorder
-  
+
   class Recorder
 
     attr_reader :recordings
@@ -52,7 +52,7 @@ module Camcorder
           @changed = true
           if recordings.has_key?(key)
             if recordings[key] != recording
-              raise RecordingError(key)
+              raise RecordingError.new(key)
             end
           else
             recordings[key] = recording
