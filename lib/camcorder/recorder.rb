@@ -8,10 +8,11 @@ module Camcorder
     attr_reader :recordings
     attr_reader :filename
 
-    def initialize(filename)
+    def initialize(filename, verify_recordings: Camcorder.config.verify_recordings)
       @filename = filename
       @recordings = {}
       @changed = false
+      @verify_recordings = verify_recordings
     end
 
     def transaction(&block)
@@ -51,7 +52,7 @@ module Camcorder
         ensure
           @changed = true
           if recordings.has_key?(key)
-            if recordings[key] != recording
+            unless verify_recordings(recordings[key], recording)
               raise RecordingError.new(key)
             end
           else
@@ -59,6 +60,16 @@ module Camcorder
           end
           result
         end
+      end
+    end
+
+    def verify_recordings(a, b)
+      if @verify_recordings.is_a?(Proc)
+        @verify_recordings.call(a, b)
+      elsif @verify_recordings
+        a == b
+      else
+        true
       end
     end
 

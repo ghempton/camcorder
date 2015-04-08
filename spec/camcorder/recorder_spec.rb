@@ -24,6 +24,67 @@ describe Camcorder::Recorder do
         end
       end
 
+      context 'when recordings with same key return different results' do
+
+        after { File.delete(filename) }
+
+        let(:filename) { 'spec/fixtures/bad_verification.yml'}
+
+        it 'raises' do
+          expect {
+            subject.transaction do
+              subject.record 'key' do
+                'dis be da result'
+              end
+              subject.record 'key' do
+                'dis be a diff result'
+              end
+            end
+          }.to raise_error(Camcorder::RecordingError)
+        end
+
+        context 'when verify_recordings: false' do
+
+          before { Camcorder.config.verify_recordings = false }
+          after { Camcorder.config.verify_recordings = true }
+
+          it 'does not raise' do
+            expect {
+              subject.transaction do
+                subject.record 'key' do
+                  'dis be da result'
+                end
+                subject.record 'key' do
+                  'dis be a diff result'
+                end
+              end
+            }.to_not raise_error
+          end
+
+        end
+
+
+        context 'when verify_recordigs is a proc' do
+          before { Camcorder.config.verify_recordings = -> (a,b) { a.value[0..3] == b.value[0..3] } }
+          after { Camcorder.config.verify_recordings = true }
+
+          it 'does not raise' do
+            expect {
+              subject.transaction do
+                subject.record 'key' do
+                  'dis be da result'
+                end
+                subject.record 'key' do
+                  'dis be a diff result'
+                end
+              end
+            }.to_not raise_error
+          end
+
+        end
+
+      end
+
       it 'should error on unknown key' do
         expect {
           subject.transaction do
