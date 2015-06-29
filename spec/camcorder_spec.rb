@@ -51,4 +51,19 @@ describe Camcorder do
     
   end
   
+  describe '.use recordings' do
+    it 'should return a proxy' do
+      Camcorder.use_recordings(TestObject, 'use_recordings_should_return_a_proxy') do
+        obj = TestObject.new
+        expect(obj).to be_a(Camcorder::Proxy)
+      end
+    end
+    
+    it 'should have recorder set' do
+      Camcorder.use_recordings(TestObject, 'use_recordings_should_have_recorder_set') do
+        obj = TestObject.new
+        expect(obj.recorder).to be_a(Camcorder::Recorder)
+      end
+    end
+  end
 end
