@@ -5,7 +5,11 @@ Need to have VCR-like functionality for more than just http? Wait no more. This 
 ```ruby
 require 'camcorder'
 
-imap = Camcorder::Proxy.new(Net::IMAP, imap_host, imap_port, imap_ssl, nil, false)
+//Need recorder 
+
+recorder = Camcorder::Recorder.new('recordings.json')
+
+imap = Camcorder::Proxy.new(recorder, Net::IMAP, imap_host, imap_port, imap_ssl, nil, false)
 imap.login(username, decrypted_password)
 imap.search(query)
 imap.disconnect
