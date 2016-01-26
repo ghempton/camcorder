@@ -73,4 +73,19 @@ module Camcorder
     end
   end
   
+  #
+  # Similar to `VCR.use_cassette`
+  #
+  def self.use_recordings(klass, name, &block)
+    recorder = Recorder.new(File.join(self.config.recordings_dir, "#{name}.yaml"))
+    begin
+      self.intercept_constructor(klass, recorder)
+    
+      recorder.transaction do
+        yield
+      end
+    ensure
+      self.deintercept_constructor(klass)
+    end
+  end
 end
