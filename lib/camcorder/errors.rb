@@ -21,7 +21,7 @@ module Camcorder
       @side_effects = side_effects
     end
     def message
-      "Recording for #{klass}.#{name} with args: #{args} and side_effects=#{side_effects} has changed. Consider using using `methods_with_side_effects`."
+      "Recording for #{klass}.#{name} with args: #{args} and side_effects=#{side_effects} has changed. Consider using `methods_with_side_effects`."
     end
   end
   
