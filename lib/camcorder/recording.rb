@@ -33,11 +33,11 @@ module Camcorder
     end
     
     def deep_clone(value)
-      YAML.load(YAML.dump(value))
+      Marshal.load(Marshal.dump(value))
     end
     
     def ==(other)
-      YAML.dump(self) == YAML.dump(other)
+      Marshal.dump(self) == Marshal.dump(other)
     end
     
   end
