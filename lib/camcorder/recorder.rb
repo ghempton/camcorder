@@ -24,7 +24,7 @@ module Camcorder
 
     def start
       if File.exists?(filename)
-        @recordings = YAML.load_file(filename)
+        @recordings = Marshal.load(File.read(filename))
         @replaying = true
       else
         @recordings = {}
@@ -35,7 +35,7 @@ module Camcorder
     def commit
       return unless @changed
       FileUtils.mkdir_p File.dirname(filename)
-      File.open(filename, 'w') {|f| YAML.dump(recordings, f) }
+      File.open(filename, 'w') {|f| f.write Marshal.dump(recordings) }
     end
 
     def record(key, &block)
